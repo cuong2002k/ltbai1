@@ -1,27 +1,37 @@
 const { useState } = require("react");
 import react from "react";
-const { Appbar } = require("react-native-paper");
+import { Button } from "react-native";
 
-function CustomNavigationBar({ navigation, route, options, back, }) {
+const { Appbar, Menu, Divider } = require("react-native-paper");
+
+const CustomNavigationBar = ({ navigation, route, options, back, }) => {
     const [visible, SetVisible] = useState(false);
     const OpenMenu = () => SetVisible(true);
     const CloseMenu = () => SetVisible(false);
     return (
-        <Appbar.Header>
-            {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-            <Appbar.Content title={route.name} />
+        <Appbar.Header dark={false}>
+            {back && <Appbar.BackAction onPress={() => navigation.goBack()} />}
+            <Appbar.Content title={route.name}
 
-            {!back ? (
+            />
+
+            {!back && (
                 <Menu
                     visible={visible}
                     onDismiss={CloseMenu}
-                    anchor={<Button onPress={OpenMenu}>Show menu</Button>}>
-                    <Menu.Item onPress={() => { }} title="Item 1" />
-                    <Menu.Item onPress={() => { }} title="Item 2" />
-                    <Divider />
-                    <Menu.Item onPress={() => { }} title="Item 3" />
+                    anchor={
+                        <Appbar.Action
+                            icon="dots-vertical"
+                            onPress={OpenMenu} />
+                    }>
+                    <Menu.Item
+                        onPress={() => { navigation.navigate('Home'); CloseMenu(); }}
+                        title="Home" />
+                    <Menu.Item
+                        onPress={() => { navigation.navigate('Details'); CloseMenu(); }}
+                        title="Details" />
                 </Menu>
-            ) : null}
+            )}
         </Appbar.Header>
     );
 

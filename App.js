@@ -4,21 +4,24 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from "./Src/Bai2/HomeScreen";
 import DetailsScreen from "./Src/Bai2/DetailsScreen";
+import MyRouter from "./Router/MyRouter";
+import { PaperProvider } from "react-native-paper";
+import MyDrawerNavigation from "./Router/MyDrawerNavigation";
+import MyBottomNavigation from "./Router/MyBottomNavigation";
 
-const stack = createNativeStackNavigator();
+
 
 const App = () => {
 
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName="Home"
-
-      >
-        <stack.Screen name="Home" component={HomeScreen} />
-        <stack.Screen name="Details" component={DetailsScreen} />
-      </stack.Navigator>
+      <PaperProvider>
+        {/* <MyRouter /> */}
+        {/* <MyDrawerNavigation />
+         */}
+        <MyBottomNavigation />
+      </PaperProvider>
     </NavigationContainer>
-
   );
 }
 const styles = StyleSheet.create({
